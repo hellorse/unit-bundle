@@ -92,7 +92,6 @@ trait AuthenticationTrait
         $client = self::createClient();
 
         if (is_string($user) && $user !== '') {
-            /** @var UserInterface $user */
             $user = $this->getReference($user);
         }
 
@@ -161,7 +160,7 @@ trait AuthenticationTrait
      */
     protected function authenticationTearDown(): void
     {
-        $container = $this->getContainer();
+        $container = $this->container();
 
         if ($container->has('security.token_storage')) {
             /** @var TokenStorageInterface $tokenStorage */

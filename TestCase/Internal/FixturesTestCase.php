@@ -8,7 +8,6 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -55,8 +54,8 @@ class FixturesTestCase extends WebTestCase
         if (self::doesClassNeedsFixtures()) {
             FixturesManager::$needFixturesLoading = true;
 
-            self::$userRoles = $this->getContainer()->hasParameter('rich_congress_unit.test_roles')
-                ? $this->getContainer()->getParameter('rich_congress_unit.test_roles')
+            self::$userRoles = $this->container()->hasParameter('rich_congress_unit.test_roles')
+                ? $this->container()->getParameter('rich_congress_unit.test_roles')
                 : [];
         }
     }

@@ -1,5 +1,5 @@
 {
-    "name": "richcongress/unit-bundle",
+    "name": "hellorse/unit-bundle",
     "description": "A unit bundle for Symfony 4+",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -10,31 +10,31 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "ext-json": "*",
-        "brianium/paratest": "^3.1",
+        "brianium/paratest": "^6.0",
         "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-fixtures-bundle": "^3.2",
         "doctrine/orm": "^2.6",
-        "liip/functional-test-bundle": "^3.0",
-        "liip/test-fixtures-bundle": "^1.0",
+        "liip/functional-test-bundle": "^4.5",
+        "liip/test-fixtures-bundle": "^2.0",
         "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^7.5",
-        "symfony/config": "^4.0",
-        "symfony/console": "^4.0",
-        "symfony/dependency-injection": "^4.0",
-        "symfony/phpunit-bridge": "^4.0",
-        "symfony/serializer": "^4.0",
-        "symfony/validator": "^4.0"
+        "phpunit/phpunit": "^9",
+        "symfony/config": "^5.4",
+        "symfony/console": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/phpunit-bridge": "^5.4",
+        "symfony/serializer": "^5.4",
+        "symfony/validator": "^5.4"
     },
     "require-dev": {
-        "eightpoints/guzzle-bundle": "^7.6",
+        "eightpoints/guzzle-bundle": "^8.3",
         "php-coveralls/php-coveralls": "^2.1",
-        "symfony/form": "^4.0",
+        "symfony/form": "^5.4",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/security-bundle": "^5.4",
+        "symfony/yaml": "^5.4"
     },
     "autoload": {
         "psr-4": {

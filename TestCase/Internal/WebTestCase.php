@@ -3,18 +3,15 @@
 namespace RichCongress\Bundle\UnitBundle\TestCase\Internal;
 
 use Doctrine\ORM\EntityManagerInterface;
-use GuzzleHttp\Psr7\Response;
 use Liip\FunctionalTestBundle\Test\WebTestCase as BaseWebTestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Mockery\MockInterface;
-use RichCongress\Bundle\UnitBundle\Mock\MockedServiceOnSetUpInterface;
 use RichCongress\Bundle\UnitBundle\TestTrait\CommonTestCaseTrait;
 use RichCongress\Bundle\UnitBundle\Utility\OverrideServicesUtility;
 use RichCongress\Bundle\UnitBundle\Utility\TestConfigurationExtractor;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as SymfonyKernelTestCase;
 
 /**
  * Class WebTestCase
@@ -63,7 +60,7 @@ class WebTestCase extends BaseWebTestCase
         parent::__construct($name, $data, $dataName);
 
         if (self::$container === null && self::doesClassNeedsContainer()) {
-            self::$container = parent::getContainer();
+            self::$container = parent::container();
         }
     }
 
@@ -98,7 +95,7 @@ class WebTestCase extends BaseWebTestCase
             parent::setUp();
 
             if (self::$container === null) {
-                self::$container = parent::getContainer();
+                self::$container = parent::container();
             }
 
             OverrideServicesUtility::mockServices(self::$container);
@@ -158,7 +155,7 @@ class WebTestCase extends BaseWebTestCase
      *
      * @return ContainerInterface
      */
-    protected function getContainer(): ContainerInterface
+    protected function container(): ContainerInterface
     {
         if (self::$isTestInititialized) {
             $this->checkContainerEnabled();
@@ -172,11 +169,7 @@ class WebTestCase extends BaseWebTestCase
             self::$containerGetBeforeClient = true;
         }
 
-        if (self::$container !== null) {
-            return self::$container;
-        }
-
-        return parent::getContainer();
+        return SymfonyKernelTestCase::container();
     }
 
     /**
@@ -186,7 +179,7 @@ class WebTestCase extends BaseWebTestCase
      */
     public function getManager(): ?EntityManagerInterface
     {
-        $container = $this->getContainer();
+        $container = $this->container();
 
         try {
             /** @var EntityManagerInterface $entityManager */
@@ -210,7 +203,7 @@ class WebTestCase extends BaseWebTestCase
      */
     public function getService(string $service)
     {
-        return $this->getContainer()->get($service);
+        return $this->container()->get($service);
     }
 
     /**
@@ -242,7 +235,7 @@ class WebTestCase extends BaseWebTestCase
         $this->checkContainerEnabled();
 
         /** @var ContainerInterface $container */
-        $container = $inputContainer ?? $this->getContainer();
+        $container = $inputContainer ?? $this->container();
 
         if (\is_string($mockService)) {
             $mockService = \Mockery::mock($mockService ?? $service);
