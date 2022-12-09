@@ -32,7 +32,7 @@ class DebugFixturesCommandTest extends CommandTestCase
      */
     public function beforeTest(): void
     {
-        $this->command = $this->container()->get(DebugFixturesCommand::class);
+        $this->command = $this->fetchContainer()->get(DebugFixturesCommand::class);
     }
 
     /**

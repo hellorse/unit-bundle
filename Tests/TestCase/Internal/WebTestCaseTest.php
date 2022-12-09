@@ -92,7 +92,7 @@ class WebTestCaseTest extends WebTestCase
      */
     public function testCreateClientAfterGetContainer(): void
     {
-        $this->container();
+        $this->fetchContainer();
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('You must create client before any service manipulation.');
@@ -267,6 +267,6 @@ class WebTestCaseTest extends WebTestCase
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('You did not mentionned that you want to load a container. Add the annotation @WithContainer into the class or test PHP Doc.');
 
-        $this->container();
+        $this->fetchContainer();
     }
 }

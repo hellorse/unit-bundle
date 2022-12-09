@@ -37,7 +37,7 @@ class CommandTestCase extends TestCase
         if ($this->command !== null) {
             // Declare the command within the application first
             if (self::doesTestNeedsContainer()) {
-                $kernel = $this->container()->get('kernel');
+                $kernel = $this->fetchContainer()->get('kernel');
                 $application = new Application($kernel);
                 $application->add($this->command);
             }

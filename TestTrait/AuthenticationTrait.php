@@ -160,7 +160,7 @@ trait AuthenticationTrait
      */
     protected function authenticationTearDown(): void
     {
-        $container = $this->container();
+        $container = $this->fetchContainer();
 
         if ($container->has('security.token_storage')) {
             /** @var TokenStorageInterface $tokenStorage */

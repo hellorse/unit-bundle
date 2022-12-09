@@ -60,7 +60,7 @@ class WebTestCase extends BaseWebTestCase
         parent::__construct($name, $data, $dataName);
 
         if (self::$container === null && self::doesClassNeedsContainer()) {
-            self::$container = parent::container();
+            self::$container = parent::fetchContainer();
         }
     }
 
@@ -95,7 +95,7 @@ class WebTestCase extends BaseWebTestCase
             parent::setUp();
 
             if (self::$container === null) {
-                self::$container = parent::container();
+                self::$container = parent::fetchContainer();
             }
 
             OverrideServicesUtility::mockServices(self::$container);
@@ -155,7 +155,7 @@ class WebTestCase extends BaseWebTestCase
      *
      * @return ContainerInterface
      */
-    protected function container(): ContainerInterface
+    protected function fetchContainer(): ContainerInterface
     {
         if (self::$isTestInititialized) {
             $this->checkContainerEnabled();
@@ -169,7 +169,7 @@ class WebTestCase extends BaseWebTestCase
             self::$containerGetBeforeClient = true;
         }
 
-        return SymfonyKernelTestCase::container();
+        return SymfonyKernelTestCase::fetchContainer();
     }
 
     /**
@@ -179,7 +179,7 @@ class WebTestCase extends BaseWebTestCase
      */
     public function getManager(): ?EntityManagerInterface
     {
-        $container = $this->container();
+        $container = $this->fetchContainer();
 
         try {
             /** @var EntityManagerInterface $entityManager */
@@ -203,7 +203,7 @@ class WebTestCase extends BaseWebTestCase
      */
     public function getService(string $service)
     {
-        return $this->container()->get($service);
+        return $this->fetchContainer()->get($service);
     }
 
     /**
@@ -235,7 +235,7 @@ class WebTestCase extends BaseWebTestCase
         $this->checkContainerEnabled();
 
         /** @var ContainerInterface $container */
-        $container = $inputContainer ?? $this->container();
+        $container = $inputContainer ?? $this->fetchContainer();
 
         if (\is_string($mockService)) {
             $mockService = \Mockery::mock($mockService ?? $service);
