@@ -54,8 +54,8 @@ class FixturesTestCase extends WebTestCase
         if (self::doesClassNeedsFixtures()) {
             FixturesManager::$needFixturesLoading = true;
 
-            self::$userRoles = $this->fetchContainer()->hasParameter('rich_congress_unit.test_roles')
-                ? $this->fetchContainer()->getParameter('rich_congress_unit.test_roles')
+            self::$userRoles = $this->getContainer()->hasParameter('rich_congress_unit.test_roles')
+                ? $this->getContainer()->getParameter('rich_congress_unit.test_roles')
                 : [];
         }
     }

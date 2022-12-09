@@ -74,7 +74,7 @@ class AuthenticationTraitTest extends TestCase
         $this->authenticate('');
 
         /** @var TokenStorageInterface $tokenStorage */
-        $tokenStorage = $this->fetchContainer()->get('security.token_storage');
+        $tokenStorage = $this->getContainer()->get('security.token_storage');
 
         self::assertNull($tokenStorage->getToken());
     }
@@ -89,7 +89,7 @@ class AuthenticationTraitTest extends TestCase
         $this->authenticate($user);
 
         /** @var TokenStorageInterface $tokenStorage */
-        $tokenStorage = $this->fetchContainer()->get('security.token_storage');
+        $tokenStorage = $this->getContainer()->get('security.token_storage');
         /** @var TokenInterface $token */
         $token = $tokenStorage->getToken();
 
@@ -104,7 +104,7 @@ class AuthenticationTraitTest extends TestCase
         $this->authenticate('user_2');
 
         /** @var TokenStorageInterface $tokenStorage */
-        $tokenStorage = $this->fetchContainer()->get('security.token_storage');
+        $tokenStorage = $this->getContainer()->get('security.token_storage');
         /** @var TokenInterface $token */
         $token = $tokenStorage->getToken();
 
